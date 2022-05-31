@@ -7,8 +7,8 @@ const LightAndDarkMode = () => {
       margin-left: auto;
       padding: 2px;
       position: relative;
-      width: 60px;
-      height: 30px;
+      width: 40px;
+      height: 20px;
       border-radius: 160px;
       background-color: #f0f0f0;
       transition: 0ms.5s;
@@ -19,8 +19,8 @@ const LightAndDarkMode = () => {
       position: absolute;
       top: 1.5px;
       left: 2px;
-      width: 28px;
-      height: 28px;
+      width: 18px;
+      height: 18px;
       background: linear-gradient(to bottom, #f0f0f0, #acabab);
       border-radius: 50%;
       border: 1px solid #fff;
