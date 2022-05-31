@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 import LightAndDarkMode from "./Light-and-dark-mode";
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
     navbar: css`
       text-align: center;
       background-color: #eeeeef;
+      padding: 10px 10px 0 10px;
       & h1 {
         padding: 10px 0;
         text-transform: uppercase;
@@ -27,11 +29,12 @@ const Navbar = () => {
   };
   return (
     <nav css={styles.navbar}>
-        <LightAndDarkMode/>
-      <h1>Heading</h1>
+      <LightAndDarkMode />
+      <h1>SANDBOX</h1>
       <div css={styles.subTitle}>
-        <a href="/about">About us</a>
-        <a href="/contact">Contact</a>
+        <Link to="/home">Home</Link>
+        <Link to="/about">About us</Link>
+        <Link to="/contact">Contact</Link>
       </div>
     </nav>
   );
