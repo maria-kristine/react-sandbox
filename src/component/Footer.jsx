@@ -29,7 +29,7 @@ const Footer = () => {
             <div>
                 <h4>Sandbox</h4>
                 <p>Copenhagengade 100, 3. sal</p>
-                <p>2200 Copenhagen K</p>
+                <p>2200 Copenhagen N</p>
                 <p>Denmark</p>
             </div>
            <Weather/>
