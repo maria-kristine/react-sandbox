@@ -8,7 +8,7 @@ const Weather = () => {
   const API_KEY = "e369bb56175f8c0a1afc8997af79886f";
   const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=55.676098&lon=12.568337&appid=${API_KEY}&units=${API_UNITS}`;
   const { data, isPending, error } = useFetch(API_URL);
-  console.log(data);
+ 
 
   const styles = {
     weather: css`
