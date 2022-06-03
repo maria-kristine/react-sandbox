@@ -1,36 +1,77 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const ContactForm = () => {
-    const navigate = useNavigate();
+  const schema = yup
+    .object({
+      firstName: yup
+        .string()
+        .required("Please enter your first name")
+        .matches(/^[A-Za-z]+$/i, "MUST be letters"),
+      lastName: yup
+        .string()
+        .required("Please enter your last name")
+        .matches(/^[A-Za-z]+$/i, "Must "),
+      email: yup.string().email().required("Please enter a valid email address."),
+      age: yup
+        .number()
+        .positive()
+        .min(18, "You must be over 18 years")
+        .max(99, "You need to be under 99 year")
+        .integer()
+        .required("Please add your age")
+        .typeError("Please add your age, it must be a number"),
+      textarea: yup.string().required("Please write a message").min(10),
+    })
+    .required();
 
- const handleClick = () => {
-     navigate("/thanks")
- }
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const navigate = useNavigate();
+  const onSubmit = () => {
+    navigate("/thanks");
+  };
+
   const styles = {
     contactForm: css``,
     label: css`
       text-align: left;
       display: block;
+      & p {
+        color: red;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+        
+      }
     `,
     input: css`
       width: 100%;
       padding: 6px 10px;
-      margin: 10px 0;
+      outline: none;
       border: 1px solid #ddd;
       box-sizing: border-box;
       display: block;
+      border-radius: 8px
     `,
     textarea: css`
       width: 100%;
       height: 100px;
       padding: 6px 10px;
-      margin: 10px 0;
+      outline: none;
       border: 1px solid #ddd;
       box-sizing: border-box;
       display: block;
       resize: none;
+      border-radius: 8px
     `,
     button: css`
       background: #9ec4dc;
@@ -42,24 +83,35 @@ const ContactForm = () => {
     `,
   };
   return (
-    <form onSubmit={handleClick}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label css={styles.label}>
         First name:
-        <input css={styles.input} type="text" required />
+        <input css={styles.input} type="text" {...register("firstName")} />
+        <p>{errors.firstName?.message}</p>
       </label>
       <label css={styles.label}>
         Last name:
-        <input css={styles.input} type="text" required />
+        <input css={styles.input} type="text" {...register("lastName")} />
+        <p>{errors.lastName?.message}</p>
       </label>
       <label css={styles.label}>
         Email:
-        <input css={styles.input} type="text" required />
+        <input css={styles.input} type="text" {...register("email")} />
+        <p>{errors.email?.message}</p>
+      </label>
+      <label css={styles.label}>
+        Age:
+        <input css={styles.input} type="number" {...register("age")} />
+        <p>{errors.age?.message}</p>
       </label>
       <label css={styles.label}>
         Message:
-        <textarea css={styles.textarea} required></textarea>
+        <textarea css={styles.textarea} {...register("textarea")}></textarea>
+        <p>{errors.textarea?.message}</p>
       </label>
-      <button type="submit" css={styles.button}>Send</button>
+      <button type="submit" css={styles.button}>
+        Send
+      </button>
     </form>
   );
 };
