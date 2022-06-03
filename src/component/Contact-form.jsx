@@ -11,12 +11,15 @@ const ContactForm = () => {
       firstName: yup
         .string()
         .required("Please enter your first name")
-        .matches(/^[A-Za-z]+$/i, "MUST be letters"),
+        .matches(/^[A-Za-z ]+$/i, "MUST be letters"),
       lastName: yup
         .string()
         .required("Please enter your last name")
-        .matches(/^[A-Za-z]+$/i, "Must "),
-      email: yup.string().email().required("Please enter a valid email address."),
+        .matches(/^[A-Za-z" "]+$/i, "Must "),
+      email: yup
+        .string()
+        .email()
+        .required("Please enter a valid email address."),
       age: yup
         .number()
         .positive()
@@ -50,7 +53,6 @@ const ContactForm = () => {
         color: red;
         font-size: 0.75rem;
         margin-bottom: 10px;
-        
       }
     `,
     input: css`
@@ -60,7 +62,8 @@ const ContactForm = () => {
       border: 1px solid #ddd;
       box-sizing: border-box;
       display: block;
-      border-radius: 8px
+      border-radius: 8px;
+      background-color: #fafafa;
     `,
     textarea: css`
       width: 100%;
@@ -71,7 +74,8 @@ const ContactForm = () => {
       box-sizing: border-box;
       display: block;
       resize: none;
-      border-radius: 8px
+      border-radius: 8px;
+      background-color: #fafafa;
     `,
     button: css`
       background: #9ec4dc;
@@ -87,28 +91,29 @@ const ContactForm = () => {
       <label css={styles.label}>
         First name:
         <input css={styles.input} type="text" {...register("firstName")} />
-        <p>{errors.firstName?.message}</p>
+        {errors.firstName?.message ? <p>{errors.textarea?.message}</p> : <p>&nbsp;</p>}
       </label>
       <label css={styles.label}>
         Last name:
         <input css={styles.input} type="text" {...register("lastName")} />
-        <p>{errors.lastName?.message}</p>
+        {errors.lastName?.message ? <p>{errors.textarea?.message}</p> : <p>&nbsp;</p>}
       </label>
       <label css={styles.label}>
         Email:
         <input css={styles.input} type="text" {...register("email")} />
-        <p>{errors.email?.message}</p>
+        {errors.email?.message ? <p>{errors.textarea?.message}</p> : <p>&nbsp;</p>}
       </label>
       <label css={styles.label}>
         Age:
         <input css={styles.input} type="number" {...register("age")} />
-        <p>{errors.age?.message}</p>
+        {errors.age?.message ? <p>{errors.textarea?.message}</p> : <p>&nbsp;</p>}
       </label>
       <label css={styles.label}>
         Message:
         <textarea css={styles.textarea} {...register("textarea")}></textarea>
-        <p>{errors.textarea?.message}</p>
+        {errors.textarea?.message ? <p>{errors.textarea?.message}</p> : <p>&nbsp;</p>}
       </label>
+
       <button type="submit" css={styles.button}>
         Send
       </button>
