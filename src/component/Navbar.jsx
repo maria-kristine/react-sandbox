@@ -7,7 +7,7 @@ const Navbar = () => {
   const styles = {
     navbar: css`
       text-align: center;
-      background-color: #eeeeef;
+      background-color: #ffffff;
       padding: 10px 10px 0 10px;
       & h1 {
         padding: 10px 0;
