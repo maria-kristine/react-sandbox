@@ -6,13 +6,16 @@ const Slideshow = () => {
   const styles = {
     slideShow: css`
       width: 850px;
-      margin: 0 auto;
-      margin-bottom: 30px;
+      margin: 20px auto 30px auto;
+      & button::before {
+        color: #9ec4dc;
+      }
       & img {
         width: 850px;
         height: 350px;
       }
     `,
+    slider: css``,
   };
 
   const settings = {
@@ -26,7 +29,7 @@ const Slideshow = () => {
 
   return (
     <div css={styles.slideShow}>
-      <Slider {...settings}>
+      <Slider css={styles.slider} {...settings}>
         <div>
           <img src="images/sand_1.jpg" alt="" />
         </div>
