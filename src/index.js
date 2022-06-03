@@ -9,6 +9,9 @@ import About from "./component/About";
 import Home from "./component/Home";
 import MessageSend from "./component/Message-send";
 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
